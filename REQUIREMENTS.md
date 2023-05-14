@@ -1,0 +1,19 @@
+## Functional Requirements
+- [x] Need to be able to create a user
+- [ ] Need to be able to identify the user across the requisitions
+- [ ] Should be able to register the meal eaten with the informations below: 
+    - [ ] UserEmail
+    - [ ] Name
+    - [ ] Description
+    - [ ] Date and time
+    - [ ] is in or out the diet
+- [ ] Should be able to EDIT a meal, being able to edit all of the data above (except the userId)
+- [ ] Should be able to DELETE a meal
+- [ ] Should be able to list all of his meals
+- [ ] Should be able to see any specific meal (only can see his own meals)
+- [ ] Should be able to recovery every user metric below:
+    - [ ] Amount of all register meals
+    - [ ] Amount of all meals inside the diet
+    - [ ] Amount of all meals outside the diet
+    - [ ] Best sequence of inside the diet meals made
+- [ ] The user can only see, edit or delete meals that himself has created
