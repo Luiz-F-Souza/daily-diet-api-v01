@@ -10,6 +10,7 @@ export async function up(knex: Knex): Promise<void> {
     columns.timestamp('created_at').defaultTo(knex.fn.now()).notNullable()
     columns.timestamp('updated_at')
     columns.boolean('is_inside_diet').notNullable()
+    columns.date('eaten_date_time').notNullable()
   })
 }
 

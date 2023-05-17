@@ -10,7 +10,6 @@ export async function up(knex: Knex): Promise<void> {
     columns.string('password').notNullable()
     columns.timestamp('created_at').defaultTo(knex.fn.now()).notNullable()
     columns.string('crypto_salt').notNullable()
-
   })
 }
 

@@ -8,7 +8,8 @@ declare module 'knex/types/tables' {
       description: string,
       created_at: string,
       updated_at?: string,
-      is_inside_diet: boolean
+      is_inside_diet: boolean,
+      eaten_date_time: string,
     },
   
     users:{

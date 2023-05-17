@@ -7,14 +7,14 @@ import crypto from 'crypto'
 async function createUserRoute(app:FastifyInstance) {
 
   app.post('/', async (request, reply) => {
-    const createUserBodySchema = z.object({
+    const createUserRequestSchema = z.object({
       email: z.string().email('Digite um email válido').nonempty('Digite um email'),
       password: z.string().min(6,"A senha precisa ter, no mínimo, 6 caracteres 😊"),
       name: z.string().min(3, 'Digite seu nome 😊')
     })
 
     try{
-      const requestBody = createUserBodySchema.parse(request.body)
+      const requestBody = createUserRequestSchema.parse(request.body)
 
 
       const { email, password, name } = requestBody
