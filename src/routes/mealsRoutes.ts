@@ -2,15 +2,16 @@ import { FastifyInstance } from "fastify";
 import { z } from 'zod'
 import { knexSetup } from "../knexConfig";
 import crypto from 'crypto'
+import { checkIfUserIsLogged } from "../middlewares/checkIfUserIsLogged";
+
+const preHandler = [checkIfUserIsLogged]
 
 async function mealsRoutes( app: FastifyInstance ) {
   
   // New Meal
-  app.post('/new-meal', async (request, reply) => {
+  app.post('/new-meal',{preHandler},async (request, reply) => {
 
     const { emailLogged } = request.cookies
-
-    if(!emailLogged) return reply.status(400).send('Faça Login para criar uma refeição')
 
     const newMealRequestSchema = z.object({
       description: z.string().min(4, "Descreva sua dúvida com pelo menos 4 caracteres 😉").nonempty(),
@@ -47,11 +48,9 @@ async function mealsRoutes( app: FastifyInstance ) {
   })
 
   // Edit specific meal
-  app.put('/edit/:id', async (request, reply) => {
+  app.put('/edit/:id',{preHandler} ,async (request, reply) => {
 
     const { emailLogged } = request.cookies
-
-    if(!emailLogged) return reply.status(400).send('faça login para prosseguir')
 
     const editMealRequestSchema = z.object({
       description: z.string().optional(),
@@ -83,11 +82,9 @@ async function mealsRoutes( app: FastifyInstance ) {
   })
 
   // Deletes specific meal
-  app.delete('/delete/:id', async(request, reply) => {
+  app.delete('/delete/:id',{preHandler},async(request, reply) => {
 
     const { emailLogged } = request.cookies
-
-    if(!emailLogged) return reply.status(400).send('faça login para prosseguir')
 
     const paramsSchema = z.object({
       id: z.string().uuid("Digite um uuid em formato válido").nonempty()
@@ -108,11 +105,10 @@ async function mealsRoutes( app: FastifyInstance ) {
   })
 
   // Gets all meals
-  app.get('/all', async (request, reply) => {
+  app.get('/all',{preHandler} ,async (request, reply) => {
 
     const { emailLogged } = request.cookies
-    
-    if(!emailLogged) return reply.status(400).send('faça login para continuar')
+
     try{
       
 
@@ -128,17 +124,15 @@ async function mealsRoutes( app: FastifyInstance ) {
     
   })
 
-  app.get('/:id', async (request, reply) => {
+  // Gets specific meal
+  app.get('/:id',{preHandler},async (request, reply) => {
 
     const paramsSchema = z.object({ id: z.string().nonempty() })
 
     const params = paramsSchema.parse(request.params)
 
     const { emailLogged } = request.cookies
-    const { id } = params
-
-    if(!emailLogged) return reply.status(400).send('faça login para visualizar a refeição')
-    
+    const { id } = params   
 
     try{
       const meal = await knexSetup('meals').where({

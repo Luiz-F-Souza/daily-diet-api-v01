@@ -1,15 +1,14 @@
 import { FastifyInstance } from 'fastify'
 import { knexSetup } from '../knexConfig'
+import { checkIfUserIsLogged } from '../middlewares/checkIfUserIsLogged'
 
-
+const preHandler = [checkIfUserIsLogged]
 
 async function metricsRoute(app: FastifyInstance){
 
-  app.get("/", async (request, reply) => {
+  app.get("/",{preHandler} ,async (request, reply) => {
 
     const { emailLogged } = request.cookies
-
-    if(!emailLogged) return reply.status(400).send('faça login para continuar')
 
     try{
       const meals = await knexSetup('meals').where('user_email',emailLogged)
