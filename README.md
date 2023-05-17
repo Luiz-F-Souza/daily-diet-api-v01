@@ -1,7 +1,26 @@
 # Project Name:
   Daily Diet API
 
-## Goals:
+## Routes
+- AUTH
+  - To create a new user
+    - /create-user
+  - To login or logout
+  - /login
+  - /logout
+- MEALS
+  - To *CREATE NEW* meal
+  - /meals/new-meal
+  - To *LIST ALL* meals
+    - /meals/all
+  - To *LIST SPECIFIC* meal
+    - /meals/:id
+  - To *DELETE* a meal
+    - /meals/delete/:id
+  - To *EDIT* a meal
+    - /meals/edit/:id
+- METRICS
+  - /metrics
 
 ## Technologies
 - NodeJS
