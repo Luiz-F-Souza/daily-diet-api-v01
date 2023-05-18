@@ -19,11 +19,12 @@
     "tsup": "^6.7.0",
     "tsx": "^3.12.7",
     "typescript": "^5.0.4",
-    "vitest": "^0.31.0"
+    "vitest": "^0.31.1",
+    "@types/supertest": "^2.0.12"
   },
   "dependencies": {
     "@fastify/cookie": "^8.3.0",
-    "@types/supertest": "^2.0.12",
+    "dotenv": "^16.0.3",
     "fastify": "^4.17.0",
     "knex": "^2.4.2",
     "sqlite3": "^5.1.6",

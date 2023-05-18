@@ -47,4 +47,4 @@
 
 - ## Types packages
   - npm install @types/node --save-dev
-  - npm install --save @types/supertest
+  - npm install  @types/supertest --save-dev
